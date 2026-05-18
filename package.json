@@ -1,0 +1,17 @@
+{
+  "name": "english-playwright-automation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "test:headed": "PLAYWRIGHT_SLOW_MO_MS=500 STEP_DELAY_MS=700 playwright test --headed --workers=1",
+    "test:debug": "PLAYWRIGHT_SLOW_MO_MS=300 STEP_DELAY_MS=400 playwright test --debug --workers=1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.8.0",
+    "typescript": "^6.0.3"
+  }
+}

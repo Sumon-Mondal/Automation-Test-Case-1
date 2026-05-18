@@ -1,0 +1,6 @@
+# Every command ends with a semicolon.
+Login to Demo App;
+Navigate to "Web Application";
+Verify "Implement user authentication" is in the "To Do" column;
+Confirm tags: "Feature" "High Priority";
+Exit;
