@@ -59,11 +59,3 @@ Example:
 PLAYWRIGHT_SLOW_MO_MS=1000 STEP_DELAY_MS=1000 npm run test:headed
 ```
 
-Optional overrides:
-
-```bash
-DEMO_APP_URL=https://animated-gingersnap-8cf7f2.netlify.app/ \
-DEMO_APP_EMAIL=admin \
-DEMO_APP_PASSWORD=password123 \
-npm test
-```
