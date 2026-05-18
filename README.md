@@ -50,7 +50,24 @@ Run every English test case:
 npm test
 ```
 
-Run one English test case by file/name:
+You can also use the explicit all-tests command:
+
+```bash
+npm run test:all
+```
+
+Run one English test case at a time:
+
+| Test case | English file | Command |
+| --- | --- | --- |
+| Test Case 1 | `features/test-case-1.english` | `npm run test:case-1` |
+| Test Case 2 | `features/test-case-2.english` | `npm run test:case-2` |
+| Test Case 3 | `features/test-case-3.english` | `npm run test:case-3` |
+| Test Case 4 | `features/test-case-4.english` | `npm run test:case-4` |
+| Test Case 5 | `features/test-case-5.english` | `npm run test:case-5` |
+| Test Case 6 | `features/test-case-6.english` | `npm run test:case-6` |
+
+The environment-variable filter still works if you prefer it:
 
 ```bash
 ENGLISH_SUITE=test-case-3 npm test
@@ -76,7 +93,7 @@ npm run typecheck
 
 ## Watch The Automation
 
-For demos or local debugging, use the visible mode. It opens the browser and adds a small delay so the automation is easy to follow:
+For demos or local debugging, use the visible mode. It opens an English/US Chromium browser and adds a pause after every English step so the automation is easy to follow:
 
 ```bash
 npm run test:visible
@@ -85,13 +102,24 @@ npm run test:visible
 Run one test case in visible mode:
 
 ```bash
-ENGLISH_SUITE=test-case-3 npm run test:visible
+npm run test:visible:case-3
 ```
 
 The visible mode uses:
 
-- `PLAYWRIGHT_SLOW_MO_MS=500` to slow each browser action.
-- `STEP_DELAY_MS=700` to pause after each English step.
+- `PLAYWRIGHT_SLOW_MO_MS=750` to slow each browser action.
+- `STEP_DELAY_MS=1000` to pause after each English step.
+
+Visible one-by-one commands:
+
+| Test case | Command |
+| --- | --- |
+| Test Case 1 | `npm run test:visible:case-1` |
+| Test Case 2 | `npm run test:visible:case-2` |
+| Test Case 3 | `npm run test:visible:case-3` |
+| Test Case 4 | `npm run test:visible:case-4` |
+| Test Case 5 | `npm run test:visible:case-5` |
+| Test Case 6 | `npm run test:visible:case-6` |
 
 You can adjust the delays when needed:
 
