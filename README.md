@@ -1,6 +1,20 @@
-# English Language Test Automation
+# Automation Test Cases
 
 This project runs Playwright automation from plain-English test suite files. Each `.english` file is discovered automatically and becomes its own Playwright test.
+
+## Quick Commands
+
+Run all test cases:
+
+```bash
+npm test
+```
+
+Watch all test cases run in a visible browser:
+
+```bash
+npm run test:visible
+```
 
 Example suite file:
 
@@ -44,17 +58,13 @@ npm install
 npx playwright install chromium
 ```
 
-Run every English test case:
+**Run all test cases:**
 
 ```bash
 npm test
 ```
 
-You can also use the explicit all-tests command:
-
-```bash
-npm run test:all
-```
+(Or use the explicit command: `npm run test:all`)
 
 Run one English test case at a time:
 
@@ -137,4 +147,28 @@ Run with Playwright Inspector for step-by-step debugging:
 
 ```bash
 npm run test:debug
+```
+
+## Video Walkthrough
+
+Use this flow if you want to record a video explaining how the automation works:
+
+1. Start with the project structure and explain that the English files in `features/` are the test cases.
+2. Open one file, such as `features/test-case-1.english`, and read the steps out loud: login, navigate, verify the card, confirm tags, and exit.
+3. Open `tests/english-suites.spec.ts` and explain that Playwright discovers every `.english` file and creates one test for each file.
+4. Open `src/dsl/parser.ts` and explain that the parser turns the English lines into executable steps. Mention that it accepts semicolons, periods, or line breaks.
+5. Open `src/steps/demoAppSteps.ts` and explain that each English phrase maps to browser actions, such as filling the login form, clicking a project, finding a task card, and checking tags.
+6. Run the visible command:
+
+```bash
+npm run test:visible
+```
+
+7. While the browser is running, explain each visible action: the test logs in, chooses the project, checks the correct board column, verifies the tags, then logs out.
+8. End by showing the terminal result where Playwright reports the passing test cases.
+
+For a shorter video, run only one visible test case:
+
+```bash
+npm run test:visible:case-1
 ```
