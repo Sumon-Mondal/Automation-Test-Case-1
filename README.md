@@ -127,7 +127,7 @@ You can adjust the delays when needed:
 PLAYWRIGHT_SLOW_MO_MS=1000 STEP_DELAY_MS=1000 npm run test:visible
 ```
 
-The older headed command is kept as an alias:
+Theheaded command is kept:
 
 ```bash
 npm run test:headed
