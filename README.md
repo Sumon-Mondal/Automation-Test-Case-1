@@ -127,7 +127,7 @@ You can adjust the delays when needed:
 PLAYWRIGHT_SLOW_MO_MS=1000 STEP_DELAY_MS=1000 npm run test:visible
 ```
 
-Theheaded command is kept:
+The headed command is kept for running all the tests at once:
 
 ```bash
 npm run test:headed
