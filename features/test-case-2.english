@@ -1,0 +1,6 @@
+# Test Case 2
+Login to Demo App;
+Navigate to "Web Application";
+Verify "Fix navigation bug" is in the "To Do" column;
+Confirm tags: "Bug";
+Exit;

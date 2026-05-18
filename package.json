@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "playwright test",
+    "test:all": "playwright test",
     "typecheck": "tsc --noEmit",
-    "test:headed": "PLAYWRIGHT_SLOW_MO_MS=500 STEP_DELAY_MS=700 playwright test --headed --workers=1",
+    "test:visible": "PLAYWRIGHT_SLOW_MO_MS=500 STEP_DELAY_MS=700 playwright test --headed --workers=1",
+    "test:headed": "npm run test:visible",
     "test:debug": "PLAYWRIGHT_SLOW_MO_MS=300 STEP_DELAY_MS=400 playwright test --debug --workers=1"
   },
   "devDependencies": {

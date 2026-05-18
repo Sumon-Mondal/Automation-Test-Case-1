@@ -1,0 +1,6 @@
+# Test Case 6
+Login to Demo App;
+Navigate to "Mobile Application";
+Verify "App icon design" is in the "Done" column;
+Confirm tags: "Design";
+Exit;

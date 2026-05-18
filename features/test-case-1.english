@@ -1,4 +1,4 @@
-# Every command ends with a semicolon.
+# Test Case 1
 Login to Demo App;
 Navigate to "Web Application";
 Verify "Implement user authentication" is in the "To Do" column;

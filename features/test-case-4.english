@@ -1,0 +1,6 @@
+# Test Case 4
+Login to Demo App;
+Navigate to "Mobile Application";
+Verify "Push notification system" is in the "To Do" column;
+Confirm tags: "Feature";
+Exit;

@@ -1,0 +1,6 @@
+# Test Case 5
+Login to Demo App;
+Navigate to "Mobile Application";
+Verify "Offline mode" is in the "In Progress" column;
+Confirm tags: "Feature" & "High Priority";
+Exit;

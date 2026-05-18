@@ -5,6 +5,7 @@ export type EnglishStep = {
 };
 
 export function parseEnglishFeature(source: string, sourceFile = 'inline'): EnglishStep[] {
+  const normalizedSource = normalizeSource(source);
   const steps: EnglishStep[] = [];
   let buffer = '';
   let line = 1;
@@ -13,11 +14,14 @@ export function parseEnglishFeature(source: string, sourceFile = 'inline'): Engl
   let isEscaped = false;
   let isComment = false;
 
-  for (let index = 0; index < source.length; index += 1) {
-    const char = source[index];
+  for (let index = 0; index < normalizedSource.length; index += 1) {
+    const char = normalizedSource[index];
+    const nextChar = normalizedSource[index + 1];
 
     if (isComment) {
       if (char === '\n') {
+        pushStep(steps, buffer, stepLine, sourceFile);
+        buffer = '';
         isComment = false;
         line += 1;
       }
@@ -37,12 +41,12 @@ export function parseEnglishFeature(source: string, sourceFile = 'inline'): Engl
       inQuote = !inQuote;
     }
 
-    if (char === ';' && !inQuote) {
-      const text = buffer.trim();
-      if (text.length > 0) {
-        steps.push({ text, line: stepLine, sourceFile });
-      }
+    if (!inQuote && isStepTerminator(char, nextChar)) {
+      pushStep(steps, buffer, stepLine, sourceFile);
       buffer = '';
+      if (char === '\n') {
+        line += 1;
+      }
       continue;
     }
 
@@ -58,14 +62,11 @@ export function parseEnglishFeature(source: string, sourceFile = 'inline'): Engl
     }
   }
 
-  const unfinishedStep = buffer.trim();
-  if (unfinishedStep.length > 0) {
-    throw new Error(`Missing semicolon after step at ${sourceFile}:${stepLine}: ${unfinishedStep}`);
-  }
-
   if (inQuote) {
     throw new Error(`Unclosed quote in ${sourceFile}`);
   }
+
+  pushStep(steps, buffer, stepLine, sourceFile);
 
   return steps;
 }
@@ -79,4 +80,29 @@ export function quotedValues(stepText: string): string[] {
   }
 
   return values;
+}
+
+function normalizeSource(source: string): string {
+  return source
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u2028\u2029]/g, '\n');
+}
+
+function isStepTerminator(char: string, nextChar: string | undefined): boolean {
+  if (char === ';' || char === '\n') {
+    return true;
+  }
+
+  return char === '.' && (nextChar === undefined || /\s/.test(nextChar));
+}
+
+function pushStep(steps: EnglishStep[], rawText: string, line: number, sourceFile: string): void {
+  const text = rawText.trim();
+
+  if (text.length === 0 || /^Test Case\b/i.test(text)) {
+    return;
+  }
+
+  steps.push({ text, line, sourceFile });
 }

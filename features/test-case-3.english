@@ -1,0 +1,6 @@
+# Test Case 3
+Login to Demo App;
+Navigate to "Web Application";
+Verify "Design system updates" is in the "In Progress" column;
+Confirm tags: "Design";
+Exit;

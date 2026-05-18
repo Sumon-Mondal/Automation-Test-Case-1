@@ -29,7 +29,7 @@ export const demoAppSteps: StepHandler<DemoAppContext>[] = [
     pattern: /^Navigate to "([^"]+)"$/i,
     example: 'Navigate to "Web Application"',
     async run({ page }, match) {
-      const projectName = match[1];
+      const projectName = cleanQuotedValue(match[1]);
 
       await page
         .getByRole('button', { name: new RegExp(`^${escapeRegExp(projectName)}\\b`) })
@@ -42,7 +42,8 @@ export const demoAppSteps: StepHandler<DemoAppContext>[] = [
     pattern: /^Verify "([^"]+)" is in the "([^"]+)" column$/i,
     example: 'Verify "Implement user authentication" is in the "To Do" column',
     async run(context, match) {
-      const [, taskTitle, columnTitle] = match;
+      const taskTitle = cleanQuotedValue(match[1]);
+      const columnTitle = cleanQuotedValue(match[2]);
       const column = findColumn(context.page, columnTitle);
       const taskHeading = column.getByRole('heading', { name: taskTitle, exact: true });
       const taskCard = findTaskCard(taskHeading);
@@ -56,7 +57,7 @@ export const demoAppSteps: StepHandler<DemoAppContext>[] = [
     }
   },
   {
-    pattern: /^Confirm tags:(?:\s+"[^"]+")+$/i,
+    pattern: /^Confirm tags:\s*"[^"]+"(?:\s*(?:&|and)?\s*"[^"]+")*$/i,
     example: 'Confirm tags: "Feature" "High Priority"',
     async run(context, _match, step) {
       if (!context.lastTaskCard) {
@@ -64,7 +65,7 @@ export const demoAppSteps: StepHandler<DemoAppContext>[] = [
       }
 
       for (const tag of quotedValues(step.text)) {
-        await expect(context.lastTaskCard.getByText(tag, { exact: true })).toBeVisible();
+        await expect(context.lastTaskCard.getByText(cleanQuotedValue(tag), { exact: true })).toBeVisible();
       }
     }
   },
@@ -93,4 +94,8 @@ function findTaskCard(taskHeading: Locator): Locator {
 
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function cleanQuotedValue(value: string): string {
+  return value.trim().replace(/[.;]+$/g, '').trim();
 }
