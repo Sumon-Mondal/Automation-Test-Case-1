@@ -65,6 +65,20 @@ npm install
 npm run install:browsers
 ```
 
+If your terminal says `Missing script: "install:browsers"`, make sure you are in the project root and have the latest code:
+
+```bash
+git pull origin main
+npm install
+npm run install:browsers
+```
+
+You can also install the Playwright browser directly:
+
+```bash
+npx playwright install chromium
+```
+
 **Run all test cases:**
 
 ```bash
