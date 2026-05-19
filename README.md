@@ -51,11 +51,18 @@ Confirm tags: "Feature" & "High Priority";
 
 ## Run it
 
+Requirements:
+
+- Node.js 18 or newer
+- npm
+
+If `npm` is not recognized in your terminal, install Node.js from the official Node.js website first, then reopen the terminal.
+
 Install dependencies and Playwright's browser once:
 
 ```bash
 npm install
-npx playwright install chromium
+npm run install:browsers
 ```
 
 **Run all test cases:**
@@ -77,7 +84,7 @@ Run one English test case at a time:
 | Test Case 5 | `features/test-case-5.english` | `npm run test:case-5` |
 | Test Case 6 | `features/test-case-6.english` | `npm run test:case-6` |
 
-The environment-variable filter still works if you prefer it:
+The cross-platform commands above are recommended. The environment-variable filter still works in terminals that support this syntax:
 
 ```bash
 ENGLISH_SUITE=test-case-3 npm test
@@ -134,8 +141,10 @@ Visible one-by-one commands:
 You can adjust the delays when needed:
 
 ```bash
-PLAYWRIGHT_SLOW_MO_MS=1000 STEP_DELAY_MS=1000 npm run test:visible
+npm run test:visible -- --slow-mo=1000 --step-delay=1000
 ```
+
+The npm scripts use `scripts/run-playwright.mjs`, so the commands work across macOS, Windows, and Linux without shell-specific environment-variable syntax.
 
 The headed command is kept for running all the tests at once:
 
