@@ -10,10 +10,18 @@ Run all test cases:
 npm test
 ```
 
-Watch all test cases run in a visible browser:
+`npm test` runs in headless mode, so you will not see a browser window.
+
+Watch all test cases run in a visible browser window:
 
 ```bash
 npm run test:visible
+```
+
+Watch the tests run in Google Chrome:
+
+```bash
+npm run test:chrome
 ```
 
 Example suite file:
@@ -79,6 +87,12 @@ You can also install the Playwright browser directly:
 npx playwright install chromium
 ```
 
+If you want the visible run to use Google Chrome, install the Chrome browser channel:
+
+```bash
+npm run install:chrome
+```
+
 **Run all test cases:**
 
 ```bash
@@ -124,10 +138,16 @@ npm run typecheck
 
 ## Watch The Automation
 
-For demos or local debugging, use the visible mode. It opens an English/US Chromium browser and adds a pause after every English step so the automation is easy to follow:
+For demos or local debugging, use the visible mode. It opens a browser window and adds a pause after every English step so the automation is easy to follow:
 
 ```bash
 npm run test:visible
+```
+
+To use Google Chrome specifically:
+
+```bash
+npm run test:chrome
 ```
 
 Run one test case in visible mode:
@@ -156,6 +176,12 @@ You can adjust the delays when needed:
 
 ```bash
 npm run test:visible -- --slow-mo=1000 --step-delay=1000
+```
+
+Run one test case in Google Chrome:
+
+```bash
+npm run test:chrome -- --suite=test-case-1
 ```
 
 The npm scripts use `scripts/run-playwright.mjs`, so the commands work across macOS, Windows, and Linux without shell-specific environment-variable syntax.

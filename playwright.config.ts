@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const slowMoMs = numberFromEnv('PLAYWRIGHT_SLOW_MO_MS', 0);
+const browserChannel = process.env.PLAYWRIGHT_BROWSER_CHANNEL;
 
 export default defineConfig({
   testDir: './tests',
@@ -19,6 +20,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    ...(browserChannel ? { channel: browserChannel } : {}),
     ...(slowMoMs > 0 ? { launchOptions: { slowMo: slowMoMs } } : {})
   },
   projects: [

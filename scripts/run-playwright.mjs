@@ -31,6 +31,10 @@ const env = {
     : {})
 };
 
+if (options.browserChannel) {
+  env.PLAYWRIGHT_BROWSER_CHANNEL = options.browserChannel;
+}
+
 const playwrightArgs = ['test'];
 
 if (options.visible) {
@@ -58,6 +62,7 @@ function parseArgs(args) {
     debug: false,
     slowMoMs: undefined,
     stepDelayMs: undefined,
+    browserChannel: undefined,
     passThroughArgs: []
   };
 
@@ -84,6 +89,11 @@ function parseArgs(args) {
 
     if (arg.startsWith('--step-delay=')) {
       parsed.stepDelayMs = arg.slice('--step-delay='.length);
+      continue;
+    }
+
+    if (arg.startsWith('--browser-channel=')) {
+      parsed.browserChannel = arg.slice('--browser-channel='.length);
       continue;
     }
 
